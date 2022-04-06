@@ -1,14 +1,13 @@
 <script>
     import { page } from '$app/stores';
-
     export let title;
     export let href;
 </script>
-  
-  <a href={href} class:active={$page.url.pathname == href}>
-    <p>{title}</p>
-    <span>></span>
-  </a>
+
+<a href={href} class:active={$page.url.pathname == href}>
+  <p>{title}</p>
+  <span>></span>
+</a>
   
 <style>
 

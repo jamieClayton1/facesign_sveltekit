@@ -11,8 +11,6 @@
 		userList = userData;
 	});
 
-   
-
     const handleCreateUser = () => {
         goto('/user/create');
     }

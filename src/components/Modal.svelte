@@ -1,5 +1,4 @@
 <script>
-    import SecondaryCTAButton from "./SecondaryCTAButton.svelte";
     import PrimaryCTAButton from "./PrimaryCTAButton.svelte";
     export let header;
     export let body;

@@ -1,6 +1,5 @@
 <script>
     import Button from './Button.svelte';
-    
     export let label;
 </script>
 

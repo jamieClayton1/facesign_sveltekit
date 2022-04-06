@@ -1,7 +1,6 @@
 <script>
     import TextInput from "./TextInput.svelte";
     import PrimaryCTAButton from './PrimaryCTAButton.svelte';
-   
     import { goto } from '$app/navigation';
     import { newUser } from '../stores/newUser.js';
 

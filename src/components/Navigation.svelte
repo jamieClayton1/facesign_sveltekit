@@ -2,6 +2,7 @@
 import NavLink from "./NavLink.svelte";
 import PrimaryHeader from "./PrimaryHeader.svelte";
 </script>
+
 <main>
     <nav>
         <PrimaryHeader />

@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-
+/* Empty user store */
 let userData = {
     id: null
 }

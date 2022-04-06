@@ -9,27 +9,33 @@
     import { goto } from '$app/navigation';
     import Navigation from '../../components/Navigation.svelte';
 
+    /* Subscribe to store */
     let newUserData;
     newUser.subscribe(newUser => {
         newUserData = newUser;
 	});
     
+    /* Get face data from media input and create user, adding facial data to the global new user store*/
     const getFaceData = async () => {
         const video = document.getElementById('scanner-playback');
         
         let fullFaceDescriptions = await faceapi.detectSingleFace(video).withFaceLandmarks().withFaceDescriptor();
         const descriptor = fullFaceDescriptions.descriptor;
         const descriptorString = JSON.stringify(descriptor);
+
         newUserData.faceDescriptor = descriptorString;
         newUser.set(newUserData);
+
         const {name, email, faceDescriptor} = newUserData;
         const user = new User(name, email, faceDescriptor);
         user.create();
 
+        /* Go to home */
         goto('/');
     }
 
     onMount(async () => {
+        /* Load machine learning models for facial recognition */
         const MODEL_URL = '../../models';
 
         await faceapi.loadTinyFaceDetectorModel(MODEL_URL);

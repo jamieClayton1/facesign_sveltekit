@@ -1,6 +1,7 @@
 <script>
     import {onMount} from 'svelte';
 
+    /* Stream the video media input playback to screen */
     const streamPlayback = () => {
         const video = document.getElementById('scanner-playback');
         setTimeout(() => window.navigator.mediaDevices.getUserMedia({ video: true })

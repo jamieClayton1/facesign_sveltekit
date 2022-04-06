@@ -2,13 +2,13 @@
     import dayjs from 'dayjs';
     import { onMount } from 'svelte';
     import { Datepicker } from 'svelte-calendar';
-    import PrimaryHeader from './PrimaryHeader.svelte';
     import SecondaryHeader from './SecondaryHeader.svelte';
     import {users, getUsers} from '../stores/users';
     import {schedules, getSchedules} from '../stores/schedules';
     import PrimaryCTAButton from './PrimaryCTAButton.svelte';
     import Schedule from '../models/Schedule';
 
+    /* Subscribe to stores */
     let userList = [];
 
     users.subscribe(userData => {
@@ -21,16 +21,16 @@
 
     schedules.subscribe(scheduleData => {
         scheduleList = scheduleData
+
         scheduleTotal = scheduleData?.reduce((a, b) => {
             const dateFrom = new Date(b.time_from);
             const dateTo = new Date(b.time_to);
             const hours =  Math.abs(dateFrom - dateTo) / 36e5;
             return a + hours;
         }, 0)
-        console.log(scheduleTotal)
     })
 
-
+    /* Set datepicker theme */
     const theme = {
         calendar: {
             width: '35vw',
@@ -45,9 +45,10 @@
       
     };
     
+    /* Handle submitting new schedule form */
     const handleScheduleSubmit = async (e) => {
         
-        // const userID = e.target[0].value;
+        /* Create new user and when response arrives, get updated schedules */
         const date = dayjs($store?.selected).format('MM/DD/YYYY');
         
         const schedule = new Schedule(userID, from, to, date);
@@ -57,15 +58,18 @@
             getSchedules(dayjs($store?.selected).format('MM/DD/YYYY'))
         }
 
+        /* Reset bound variables */
         from = null;
         to = null;
     }
 
     onMount(() => {
+        /* Get users & schedules */
         getUsers();
         getSchedules(dayjs($store?.selected).format('MM/DD/YYYY'));
     });
 
+    /* Get schedules whenever the datepicker date changes */
     $: getSchedules(dayjs($store?.selected).format('MM/DD/YYYY'));
 
 
@@ -128,6 +132,7 @@
                 <p>{userList?.filter(user => user.id === schedule.user_id)[0]?.name}</p>
                 <p>{dayjs(schedule.time_from).format('HH:mm')}</p>
                 <p>{dayjs(schedule.time_to).format('HH:mm')}</p>
+                <!-- Get total hours -->
                 <p>{Math.abs(new Date(schedule.time_from) - new Date(schedule.time_to)) / 36e5}</p>
             </div>
             {/each}
