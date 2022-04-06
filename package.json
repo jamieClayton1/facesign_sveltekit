@@ -1,0 +1,23 @@
+{
+  "name": "facesign-sveltekit",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "package": "svelte-kit package",
+    "preview": "svelte-kit preview"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-auto": "next",
+    "@sveltejs/kit": "next",
+    "svelte": "^3.44.0",
+    "svelte-calendar": "^3.1.6"
+  },
+  "type": "module",
+  "dependencies": {
+    "dayjs": "^1.11.0",
+    "face-api.js": "^0.22.2",
+    "just-throttle": "^4.0.1",
+    "svelte-drag": "^3.1.0"
+  }
+}
